@@ -62,7 +62,7 @@ void Terrain::CreateVertexData()
 		{
 			UINT index = width * z + x;
 			// 좌표 뒤집어 출력하기
-			UINT pixel = width * (height - 1 - z) * x;
+			UINT pixel = width * (height - 1 - z) + x;
 
 			vertices[index].Position.x = (float)x;
 			vertices[index].Position.y = heights[pixel].r * 255.0f / 10.0f;
@@ -106,7 +106,6 @@ void Terrain::CreateBuffer()
 		D3D11_SUBRESOURCE_DATA subResource = { 0 };
 		subResource.pSysMem = vertices;
 
-		// Vertex Buffer가 제대로 생성되었는지 에러를 빠르게 찾기위해 체크하는것
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &vertexBuffer));
 	}
 
@@ -120,7 +119,6 @@ void Terrain::CreateBuffer()
 		D3D11_SUBRESOURCE_DATA subResource = { 0 };
 		subResource.pSysMem = indices;
 
-		// Vertex Buffer가 제대로 생성되었는지 에러를 빠르게 찾기위해 체크하는것
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &indexBuffer));
 	}
 
