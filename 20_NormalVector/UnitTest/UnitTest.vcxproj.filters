@@ -51,6 +51,9 @@
     <ClCompile Include="HeightMapDemo.cpp">
       <Filter>Terrain</Filter>
     </ClCompile>
+    <ClCompile Include="NormalVectorDemo.cpp">
+      <Filter>Terrain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -101,6 +104,9 @@
       <Filter>Texture</Filter>
     </ClInclude>
     <ClInclude Include="HeightMapDemo.h">
+      <Filter>Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalVectorDemo.h">
       <Filter>Terrain</Filter>
     </ClInclude>
   </ItemGroup>

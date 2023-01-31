@@ -2,6 +2,7 @@
 #include "Main.h"
 #include "Systems/Window.h"
 
+#include "NormalVectorDemo.h"
 #include "HeightMapDemo.h"
 #include "TextureSamplerDemo.h"
 #include "TextureLoadDemo.h"
@@ -21,7 +22,8 @@
 
 void Main::Initialize()
 {
-	Push(new HeightMapDemo());
+	Push(new NormalVectorDemo());
+	//Push(new HeightMapDemo());
 	//Push(new TextureSamplerDemo());
 	//Push(new TextureLoadDemo());
 	//Push(new TextureDemo());

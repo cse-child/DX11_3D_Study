@@ -56,8 +56,32 @@ void DebugLine::RenderLine(Vector3 & start, Vector3 & end, Color & color)
 	vertices[drawCount++].Position = end;
 }
 
+void DebugLine::Update()
+{
+	Matrix world;
+	D3DXMatrixIdentity(&world);
+
+	shader->AsMatrix("World")->SetMatrix(world);
+	shader->AsMatrix("View")->SetMatrix(Context::Get()->View());
+	shader->AsMatrix("Projection")->SetMatrix(Context::Get()->Projection());
+}
+
 void DebugLine::Render()
 {
+	if (drawCount < 1) return;
+
+	D3D::GetDC()->UpdateSubresource(vertexBuffer, 0, NULL, vertices, sizeof(VertexColor) * drawCount, 0);
+	
+	UINT stride = sizeof(VertexColor);
+	UINT offset = 0;
+
+	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
+	
+	shader->Draw(0, 0, drawCount);
+
+	drawCount = 0;
+	ZeroMemory(vertices, sizeof(VertexColor) * MAX_DEBUG_LINE);
 }
 
 DebugLine::DebugLine()
@@ -71,7 +95,7 @@ DebugLine::DebugLine()
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
-		desc.ByteWidth = sizeof(Vertex) * MAX_DEBUG_LINE;
+		desc.ByteWidth = sizeof(VertexColor) * MAX_DEBUG_LINE;
 		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
 		D3D11_SUBRESOURCE_DATA subResource = { 0 };

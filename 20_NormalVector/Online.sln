@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{D8
 		..\_Shaders\16_Texture.fx = ..\_Shaders\16_Texture.fx
 		..\_Shaders\18_TextureSampler.fx = ..\_Shaders\18_TextureSampler.fx
 		..\_Shaders\19_Terrain.fx = ..\_Shaders\19_Terrain.fx
+		..\_Shaders\20_DebugLine.fx = ..\_Shaders\20_DebugLine.fx
 	EndProjectSection
 EndProject
 Global
