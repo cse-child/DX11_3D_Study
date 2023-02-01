@@ -10,7 +10,7 @@ void NormalVectorDemo::Initialize()
 
 	//terrain = new Terrain(shader, L"Terrain/Grayscale.png");
 	terrain = new Terrain(shader, L"Terrain/Gray256.png");
-	terrain->Pass(1);
+	terrain->Pass(0);
 }
 
 void NormalVectorDemo::Destroy()
@@ -29,6 +29,6 @@ void NormalVectorDemo::Render()
 {
 	terrain->Render();
 
-	DebugLine::Get()->RenderLine(0, 0, 0, 0, 100, 0, 1, 0, 0);
-	DebugLine::Get()->RenderLine(1, 0, 0, 5, 100, 0, 0, 1, 0);
+	//DebugLine::Get()->RenderLine(0, 0, 0, 0, 100, 0, 1, 0, 0);
+	//DebugLine::Get()->RenderLine(1, 0, 0, 5, 100, 0, 0, 1, 0);
 }

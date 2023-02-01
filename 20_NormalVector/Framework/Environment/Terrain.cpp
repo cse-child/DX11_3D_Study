@@ -26,6 +26,10 @@ Terrain::~Terrain()
 
 void Terrain::Update()
 {
+	static Vector3 direction = Vector3(-1, -1, 1);
+	ImGui::SliderFloat3("Direction", direction, -1, 1);
+	shader->AsVector("Direction")->SetFloatVector(direction);
+
 	Matrix world;
 	D3DXMatrixIdentity(&world);
 
@@ -36,14 +40,13 @@ void Terrain::Update()
 
 void Terrain::Render()
 {
-	for (int i = 0; i < vertexCount; i++)
-	{
-		Vector3 start = vertices[i].Position;
-		Vector3 end = vertices[i].Position + vertices[i].Normal * 2;
-
-		DebugLine::Get()->RenderLine(start, end, Color(0, 1, 0, 1));
-	}
-
+	//for (int i = 0; i < vertexCount; i++)
+	//{
+	//	Vector3 start = vertices[i].Position;
+	//	Vector3 end = vertices[i].Position + vertices[i].Normal * 2;
+	//
+	//	DebugLine::Get()->RenderLine(start, end, Color(0, 1, 0, 1));
+	//}
 
 	UINT stride = sizeof(TerrainVertex);
 	UINT offset = 0;
