@@ -2,6 +2,7 @@
 #include "Main.h"
 #include "Systems/Window.h"
 
+#include "MeshDemo.h"
 #include "GetVerticalRaycast.h"
 #include "GetHeightDemo.h"
 #include "NormalVectorDemo.h"
@@ -24,7 +25,8 @@
 
 void Main::Initialize()
 {
-	Push(new GetVerticalRaycast());
+	Push(new MeshDemo());
+	//Push(new GetVerticalRaycast());
 	//Push(new GetHeightDemo());
 	//Push(new NormalVectorDemo());
 	//Push(new HeightMapDemo());

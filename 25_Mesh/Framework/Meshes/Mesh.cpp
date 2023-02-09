@@ -2,6 +2,7 @@
 #include "Mesh.h"
 
 Mesh::Mesh(Shader * shader)
+	:shader(shader)
 {
 	D3DXMatrixIdentity(&world);
 
@@ -12,7 +13,7 @@ Mesh::Mesh(Shader * shader)
 	sView = shader->AsMatrix("View");
 	sProjection = shader->AsMatrix("Projection");
 
-	sSrv = shader->AsSRV("DiffuseMap");
+	sDiffuseMap = shader->AsSRV("DiffuseMap");
 }
 
 Mesh::~Mesh()
@@ -23,7 +24,7 @@ Mesh::~Mesh()
 	SafeRelease(vertexBuffer);
 	SafeRelease(indexBuffer);
 
-	SafeDelete(texture);
+	SafeDelete(diffuseMap);
 }
 
 void Mesh::Update()
@@ -50,7 +51,7 @@ void Mesh::Render()
 	sView->SetMatrix(Context::Get()->View());
 	sProjection->SetMatrix(Context::Get()->Projection());
 
-	sSrv->SetResource(texture->SRV());
+	sDiffuseMap->SetResource(diffuseMap->SRV());
 
 	shader->DrawIndexed(0, pass, indexCount);
 }
@@ -138,9 +139,11 @@ Vector3 Mesh::Right()
 	return Vector3(world._11, world._12, world._13); // xπÊ«‚
 }
 
-void Mesh::SetTexture(wstring file)
+void Mesh::DiffuseMap(wstring file)
 {
-	texture = new Texture(file);
+	SafeDelete(diffuseMap);
+
+	diffuseMap = new Texture(file);
 }
 
 void Mesh::CreateBuffer()

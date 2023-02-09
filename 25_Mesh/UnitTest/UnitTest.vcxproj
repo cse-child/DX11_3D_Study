@@ -153,6 +153,7 @@
     <ClCompile Include="HeightMapDemo.cpp" />
     <ClCompile Include="IndexDemo.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MeshDemo.cpp" />
     <ClCompile Include="NormalVectorDemo.cpp" />
     <ClCompile Include="RectDemo.cpp" />
     <ClCompile Include="RotationDemo.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="HeightMapDemo.h" />
     <ClInclude Include="IndexDemo.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="MeshDemo.h" />
     <ClInclude Include="NormalVectorDemo.h" />
     <ClInclude Include="RectDemo.h" />
     <ClInclude Include="RotationDemo.h" />

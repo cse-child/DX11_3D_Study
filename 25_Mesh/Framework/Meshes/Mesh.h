@@ -37,7 +37,7 @@ public:
 	Vector3 Up();
 	Vector3 Right();
 
-	void SetTexture(wstring file);
+	void DiffuseMap(wstring file);
 
 protected:
 	virtual void Create() = 0;
@@ -70,7 +70,7 @@ private:
 	// 변수를 찾아주는 as 함수가 쉐이더안에 있는 변수에서 검색해야하기 때문에 속도가 느리다.
 	// 따라서 미리 검색해서 찾아놓으면 속도가 빠르다.
 	ID3DX11EffectMatrixVariable* sWorld, *sView, *sProjection;
-	ID3DX11EffectShaderResourceVariable* sSrv;
 
-	Texture* texture = NULL;
+	Texture* diffuseMap = NULL;
+	ID3DX11EffectShaderResourceVariable* sDiffuseMap;
 };

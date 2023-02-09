@@ -31,6 +31,7 @@
     <ClCompile Include="Environment\Terrain.cpp" />
     <ClCompile Include="Renders\DebugLine.cpp" />
     <ClCompile Include="Meshes\Mesh.cpp" />
+    <ClCompile Include="Meshes\MeshQuad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Renders">
@@ -81,5 +82,6 @@
     <ClInclude Include="Environment\Terrain.h" />
     <ClInclude Include="Renders\DebugLine.h" />
     <ClInclude Include="Meshes\Mesh.h" />
+    <ClInclude Include="Meshes\MeshQuad.h" />
   </ItemGroup>
 </Project>
