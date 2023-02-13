@@ -165,8 +165,10 @@ copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)UnitTest"</Comma
     </ClCompile>
     <ClCompile Include="Meshes\MeshCube.cpp" />
     <ClCompile Include="Meshes\Mesh.cpp" />
+    <ClCompile Include="Meshes\MeshCylinder.cpp" />
     <ClCompile Include="Meshes\MeshGrid.cpp" />
     <ClCompile Include="Meshes\MeshQuad.cpp" />
+    <ClCompile Include="Meshes\MeshSphere.cpp" />
     <ClCompile Include="Renders\Context.cpp" />
     <ClCompile Include="Renders\DebugLine.cpp" />
     <ClCompile Include="Renders\Shader.cpp" />
@@ -194,8 +196,10 @@ copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)UnitTest"</Comma
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Meshes\MeshCube.h" />
     <ClInclude Include="Meshes\Mesh.h" />
+    <ClInclude Include="Meshes\MeshCylinder.h" />
     <ClInclude Include="Meshes\MeshGrid.h" />
     <ClInclude Include="Meshes\MeshQuad.h" />
+    <ClInclude Include="Meshes\MeshSphere.h" />
     <ClInclude Include="Renders\Context.h" />
     <ClInclude Include="Renders\DebugLine.h" />
     <ClInclude Include="Renders\Shader.h" />

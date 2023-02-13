@@ -34,6 +34,8 @@
     <ClCompile Include="Meshes\MeshQuad.cpp" />
     <ClCompile Include="Meshes\MeshCube.cpp" />
     <ClCompile Include="Meshes\MeshGrid.cpp" />
+    <ClCompile Include="Meshes\MeshSphere.cpp" />
+    <ClCompile Include="Meshes\MeshCylinder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Renders">
@@ -87,5 +89,7 @@
     <ClInclude Include="Meshes\MeshQuad.h" />
     <ClInclude Include="Meshes\MeshCube.h" />
     <ClInclude Include="Meshes\MeshGrid.h" />
+    <ClInclude Include="Meshes\MeshSphere.h" />
+    <ClInclude Include="Meshes\MeshCylinder.h" />
   </ItemGroup>
 </Project>
