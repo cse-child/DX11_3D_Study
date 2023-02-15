@@ -159,6 +159,7 @@ copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)UnitTest"</Comma
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Environment\CubeSky.cpp" />
     <ClCompile Include="Environment\Terrain.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -193,6 +194,7 @@ copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)UnitTest"</Comma
     <ClCompile Include="Viewer\Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Environment\CubeSky.h" />
     <ClInclude Include="Environment\Terrain.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Meshes\MeshCube.h" />

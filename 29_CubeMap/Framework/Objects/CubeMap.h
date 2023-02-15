@@ -34,6 +34,8 @@ private:
 	UINT pass = 0;
 
 	MeshCube* cube;
+	//MeshSphere* cube;
+
 	ID3D11ShaderResourceView* srv = NULL;
 	ID3DX11EffectShaderResourceVariable* sSrv;
 

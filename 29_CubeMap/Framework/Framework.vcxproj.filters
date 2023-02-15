@@ -37,6 +37,7 @@
     <ClCompile Include="Meshes\MeshSphere.cpp" />
     <ClCompile Include="Meshes\MeshCylinder.cpp" />
     <ClCompile Include="Objects\CubeMap.cpp" />
+    <ClCompile Include="Environment\CubeSky.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Renders">
@@ -93,5 +94,6 @@
     <ClInclude Include="Meshes\MeshSphere.h" />
     <ClInclude Include="Meshes\MeshCylinder.h" />
     <ClInclude Include="Objects\CubeMap.h" />
+    <ClInclude Include="Environment\CubeSky.h" />
   </ItemGroup>
 </Project>

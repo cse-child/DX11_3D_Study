@@ -13,7 +13,7 @@ void CubeMapDemo::Initialize()
 
 	cubeMapShader = new Shader(L"29_CubeMap.fx");
 	cubeMap = new CubeMap(cubeMapShader);
-	cubeMap->Texture(L"Environment/SunsetCube1024.dds");
+	cubeMap->Texture(L"Environment/Earth.dds");
 	cubeMap->Position(0, 20, 0);
 	cubeMap->Scale(10, 10, 10);
 }

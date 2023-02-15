@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="CubeDemo.cpp" />
     <ClCompile Include="CubeMapDemo.cpp" />
+    <ClCompile Include="CubeSkyDemo.cpp" />
     <ClCompile Include="GetHeightDemo.cpp" />
     <ClCompile Include="GetVerticalRaycast.cpp" />
     <ClCompile Include="GridDemo.cpp" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClInclude Include="CubeDemo.h" />
     <ClInclude Include="CubeMapDemo.h" />
+    <ClInclude Include="CubeSkyDemo.h" />
     <ClInclude Include="GetHeightDemo.h" />
     <ClInclude Include="GetVerticalRaycast.h" />
     <ClInclude Include="GridDemo.h" />

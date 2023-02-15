@@ -5,6 +5,7 @@ CubeMap::CubeMap(Shader * shader)
 	:shader(shader)
 {
 	cube = new MeshCube(shader);
+	//cube = new MeshSphere(shader, 0.5f);
 
 	sSrv = shader->AsSRV("CubeMap");
 }

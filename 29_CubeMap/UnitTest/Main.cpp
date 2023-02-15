@@ -2,6 +2,7 @@
 #include "Main.h"
 #include "Systems/Window.h"
 
+#include "CubeSkyDemo.h"
 #include "CubeMapDemo.h"
 #include "MeshDemo.h"
 #include "GetVerticalRaycast.h"
@@ -26,6 +27,7 @@
 
 void Main::Initialize()
 {
+	//Push(new CubeSkyDemo());
 	Push(new CubeMapDemo());
 	//Push(new MeshDemo());
 	//Push(new GetVerticalRaycast());
