@@ -27,8 +27,8 @@
 
 void Main::Initialize()
 {
-	//Push(new CubeSkyDemo());
-	Push(new CubeMapDemo());
+	Push(new CubeSkyDemo());
+	//Push(new CubeMapDemo());
 	//Push(new MeshDemo());
 	//Push(new GetVerticalRaycast());
 	//Push(new GetHeightDemo());

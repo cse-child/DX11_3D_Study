@@ -90,6 +90,7 @@ void IndexBuffer::Render()
 
 
 ConstantBuffer::ConstantBuffer(void * data, UINT dataSize)
+	:data(data), dataSize(dataSize)
 {
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));

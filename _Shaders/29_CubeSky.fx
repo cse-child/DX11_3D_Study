@@ -1,60 +1,25 @@
-matrix World;
-matrix View;
-matrix Projection;
+#include "00_Global.fx"
 
 TextureCube SkyCubeMap;
-
-struct VertexInput
-{
-    float4 Position : Position;
-    float2 Uv : Uv;
-    float3 Normal : Normal;
-};
 
 struct VertexOutput
 {
     float4 Position : SV_Position;
-    float3 oPosition : Position1; // Original Position
-    float2 Uv : Uv;
-    float3 Normal : Normal;
+    float3 oPosition : Position1;
 };
 
-VertexOutput VS(VertexInput input)
+VertexOutput VS(Vertex input)
 {
     VertexOutput output;
 
     // 방향벡터로 전달 (w = 0)
     output.oPosition = input.Position.xyz;
 
-    output.Position = mul(input.Position, World); 
-    output.Position = mul(output.Position, View);
-    output.Position = mul(output.Position, Projection);
-
-    output.Normal = mul(input.Normal, (float3x3) World);
-
-    output.Uv = input.Uv;
+    output.Position = WorldPosition(input.Position);
+    output.Position = ViewProjection(output.Position);
     
     return output;
 }
-
-SamplerState LinearSampler
-{
-    Filter = MIN_MAG_MIP_LINEAR;
-    AddressU = Wrap;
-    AddressV = Wrap;
-};
-
-// 전면이 반시계방향(CounterClock)으로
-RasterizerState FrontCounterClockWise_True
-{
-    FrontCounterClockWise = True;
-};
-
-// Rendering 깊이 꺼주기
-DepthStencilState DepthEnable_False
-{
-    DepthEnable = false;
-};
 
 float4 PS(VertexOutput input) : SV_Target
 {
@@ -63,12 +28,14 @@ float4 PS(VertexOutput input) : SV_Target
 
 technique11 T0
 {
-    pass P0
-    {
-        SetRasterizerState(FrontCounterClockWise_True);
-        SetDepthStencilState(DepthEnable_False, 0);
+    P_RS_DSS_VP(P0, FrontCounterClockwise_True, DepthEnable_False, VS, PS)
 
-        SetVertexShader(CompileShader(vs_5_0, VS()));
-        SetPixelShader(CompileShader(ps_5_0, PS()));
-    }
+    //pass P0
+    //{
+    //    SetRasterizerState(FrontCounterClockWise_True);
+    //    SetDepthStencilState(DepthEnable_False, 0);
+    //
+    //    SetVertexShader(CompileShader(vs_5_0, VS()));
+    //    SetPixelShader(CompileShader(ps_5_0, PS()));
+    //}
 }

@@ -1,15 +1,7 @@
-matrix World;
-matrix View;
-matrix Projection;
+#include "00_Global.fx"
+
 Texture2D DiffuseMap;
 float3 Direction;
-
-struct VertexInput
-{
-    float4 Position : Position;
-    float2 Uv : Uv;
-    float3 Normal : Normal;
-};
 
 struct VertexOutput
 {
@@ -18,27 +10,18 @@ struct VertexOutput
     float3 Normal : Normal;
 };
 
-VertexOutput VS(VertexInput input)
+VertexOutput VS(VertexTextureNormal input)
 {
-    // 위치를 어떤 공간에 곱하면 그 공간으로 이동한다고 생각하면 된다.
     VertexOutput output;
-    output.Position = mul(input.Position, World); 
-    output.Position = mul(output.Position, View);
-    output.Position = mul(output.Position, Projection);
-
-    output.Normal = mul(input.Normal, (float3x3) World);
-
+    output.Position = WorldPosition(input.Position);
+    output.Position = ViewProjection(output.Position);
+    
+    output.Normal = WorldNormal(input.Normal);
+    
     output.Uv = input.Uv;
     
     return output;
 }
-
-SamplerState LinearSampler
-{
-    Filter = MIN_MAG_MIP_LINEAR;
-    AddressU = Wrap;
-    AddressV = Wrap;
-};
 
 float4 PS(VertexOutput input) : SV_Target
 {
@@ -48,24 +31,22 @@ float4 PS(VertexOutput input) : SV_Target
     return DiffuseMap.Sample(LinearSampler, input.Uv) * dot(light, normal);
 }
 
-RasterizerState FillMode_Wireframe
-{
-    FillMode = Wireframe;
-};
-
 technique11 T0
 {
-    pass P0
-    {
-        SetVertexShader(CompileShader(vs_5_0, VS()));
-        SetPixelShader(CompileShader(ps_5_0, PS()));
-    }
+    P_VP(P0, VS, PS)
+    P_RS_VP(P1, FillMode_WireFrame, VS, PS)
 
-    pass P1
-    {
-        SetRasterizerState(FillMode_Wireframe);
+    //pass P0
+    //{
+    //    SetVertexShader(CompileShader(vs_5_0, VS()));
+    //    SetPixelShader(CompileShader(ps_5_0, PS()));
+    //}
 
-        SetVertexShader(CompileShader(vs_5_0, VS()));
-        SetPixelShader(CompileShader(ps_5_0, PS()));
-    }
+    //pass P1
+    //{
+    //    SetRasterizerState(FillMode_Wireframe);
+
+    //    SetVertexShader(CompileShader(vs_5_0, VS()));
+    //    SetPixelShader(CompileShader(ps_5_0, PS()));
+    //}
 }
