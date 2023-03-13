@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework\Framework.vcxproj", "{D99F7770-4EC5-4070-98C3-BC201B940D17}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTest.vcxproj", "{042019B0-9A78-45B2-A0B1-6EB117155E8B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D99F7770-4EC5-4070-98C3-BC201B940D17} = {D99F7770-4EC5-4070-98C3-BC201B940D17}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{D85B7E28-FF39-436D-8C8C-BC36A335A660}"
+	ProjectSection(SolutionItems) = preProject
+		..\_Shaders\00_Global.fx = ..\_Shaders\00_Global.fx
+		..\_Shaders\04_Vertex.fx = ..\_Shaders\04_Vertex.fx
+		..\_Shaders\06_Triangle.fx = ..\_Shaders\06_Triangle.fx
+		..\_Shaders\07_Rect.fx = ..\_Shaders\07_Rect.fx
+		..\_Shaders\09_World.fx = ..\_Shaders\09_World.fx
+		..\_Shaders\10_World.fx = ..\_Shaders\10_World.fx
+		..\_Shaders\15_Cube.fx = ..\_Shaders\15_Cube.fx
+		..\_Shaders\16_Texture.fx = ..\_Shaders\16_Texture.fx
+		..\_Shaders\18_TextureSampler.fx = ..\_Shaders\18_TextureSampler.fx
+		..\_Shaders\19_Terrain.fx = ..\_Shaders\19_Terrain.fx
+		..\_Shaders\20_DebugLine.fx = ..\_Shaders\20_DebugLine.fx
+		..\_Shaders\25_Mesh.fx = ..\_Shaders\25_Mesh.fx
+		..\_Shaders\29_CubeMap.fx = ..\_Shaders\29_CubeMap.fx
+		..\_Shaders\29_CubeSky.fx = ..\_Shaders\29_CubeSky.fx
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditor", "ModelEditor\ModelEditor.vcxproj", "{B2DCF7CC-0A59-4180-AA54-EBA0B2B02E1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D99F7770-4EC5-4070-98C3-BC201B940D17}.Debug|x86.ActiveCfg = Debug|Win32
+		{D99F7770-4EC5-4070-98C3-BC201B940D17}.Debug|x86.Build.0 = Debug|Win32
+		{D99F7770-4EC5-4070-98C3-BC201B940D17}.Release|x86.ActiveCfg = Release|Win32
+		{D99F7770-4EC5-4070-98C3-BC201B940D17}.Release|x86.Build.0 = Release|Win32
+		{042019B0-9A78-45B2-A0B1-6EB117155E8B}.Debug|x86.ActiveCfg = Debug|Win32
+		{042019B0-9A78-45B2-A0B1-6EB117155E8B}.Debug|x86.Build.0 = Debug|Win32
+		{042019B0-9A78-45B2-A0B1-6EB117155E8B}.Release|x86.ActiveCfg = Release|Win32
+		{042019B0-9A78-45B2-A0B1-6EB117155E8B}.Release|x86.Build.0 = Release|Win32
+		{B2DCF7CC-0A59-4180-AA54-EBA0B2B02E1A}.Debug|x86.ActiveCfg = Debug|Win32
+		{B2DCF7CC-0A59-4180-AA54-EBA0B2B02E1A}.Debug|x86.Build.0 = Debug|Win32
+		{B2DCF7CC-0A59-4180-AA54-EBA0B2B02E1A}.Release|x86.ActiveCfg = Release|Win32
+		{B2DCF7CC-0A59-4180-AA54-EBA0B2B02E1A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3EF7D3A2-6C66-4405-A5DC-DA50DA9C2DF9}
+	EndGlobalSection
+EndGlobal
