@@ -42,6 +42,7 @@
     <ClCompile Include="Renders\Transform.cpp" />
     <ClCompile Include="Renders\PerFrame.cpp" />
     <ClCompile Include="Renders\Renderer.cpp" />
+    <ClCompile Include="Model\Model.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Renders">
@@ -103,5 +104,6 @@
     <ClInclude Include="Renders\Transform.h" />
     <ClInclude Include="Renders\PerFrame.h" />
     <ClInclude Include="Renders\Renderer.h" />
+    <ClInclude Include="Model\Model.h" />
   </ItemGroup>
 </Project>
