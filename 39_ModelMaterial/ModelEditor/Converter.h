@@ -23,6 +23,7 @@ public:
 private:
 	void ReadMaterialData();
 	void WriteMaterialData(wstring savePath);
+	string WriteTexture(string saveFolder, string file);
 
 private:
 	wstring file;

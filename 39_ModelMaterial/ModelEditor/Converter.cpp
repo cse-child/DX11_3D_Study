@@ -162,7 +162,7 @@ void Converter::ExportMaterial(wstring savePath, bool bOverwrite)
 	/* 덮어씌우지 않는 경우 */
 	if(bOverwrite == false)
 	{
-		if (Path::ExistDirectory(savePath) == true) // 이미 파일이 존재한다면 수행X
+		if (Path::ExistFile(savePath) == true) // 이미 파일이 존재한다면 수행X
 			return;
 	}
 
@@ -241,10 +241,117 @@ void Converter::WriteMaterialData(wstring savePath)
 		element->SetText(material->Name.c_str());
 		//element->SetAttribute("R", 10); // 속성값
 		node->LinkEndChild(element);
+
+		element = document->NewElement("DiffuseFile");
+		element->SetText(WriteTexture(folder, material->DiffuseFile).c_str());
+		node->LinkEndChild(element);
+
+		element = document->NewElement("SpecularFile");
+		element->SetText(WriteTexture(folder, material->SpecularFile).c_str());
+		node->LinkEndChild(element);
+
+		element = document->NewElement("NormalFile");
+		element->SetText(WriteTexture(folder, material->NormalFile).c_str());
+		node->LinkEndChild(element);
+
+		element = document->NewElement("Ambient");
+		element->SetAttribute("R", material->Ambient.r);
+		element->SetAttribute("G", material->Ambient.g);
+		element->SetAttribute("B", material->Ambient.b);
+		element->SetAttribute("A", material->Ambient.a);
+		node->LinkEndChild(element);
+
+		element = document->NewElement("Diffuse");
+		element->SetAttribute("R", material->Diffuse.r);
+		element->SetAttribute("G", material->Diffuse.g);
+		element->SetAttribute("B", material->Diffuse.b);
+		element->SetAttribute("A", material->Diffuse.a);
+		node->LinkEndChild(element);
+
+		element = document->NewElement("Specular");
+		element->SetAttribute("R", material->Specular.r);
+		element->SetAttribute("G", material->Specular.g);
+		element->SetAttribute("B", material->Specular.b);
+		element->SetAttribute("A", material->Specular.a);
+		node->LinkEndChild(element);
+
+		element = document->NewElement("Emissive");
+		element->SetAttribute("R", material->Emissive.r);
+		element->SetAttribute("G", material->Emissive.g);
+		element->SetAttribute("B", material->Emissive.b);
+		element->SetAttribute("A", material->Emissive.a);
+		node->LinkEndChild(element);
+
+		SafeDelete(material);
 	}
 
 	document->SaveFile((folder + file).c_str());
 	SafeDelete(document);
+}
+
+string Converter::WriteTexture(string saveFolder, string file)
+{
+	if (file.length() < 1) return "";
+
+	string fileName = Path::GetFileName(file);
+
+	// 경로명에 '내장 텍스처'가 있다면 텍스처를 return 받고, 없다면 null을 받음
+	const aiTexture* texture = scene->GetEmbeddedTexture(file.c_str());
+
+	string path = "";
+	if(texture != NULL) // 내장 텍스처가 있는 경우
+	{
+		path = saveFolder + fileName;
+
+		if(texture->mHeight < 1) // 높이가 없는 경우
+		{
+			BinaryWriter w;
+			w.Open(String::ToWString(path));
+			w.Byte(texture->pcData, texture->mWidth);
+			w.Close();
+		}
+		else
+		{
+			/* Texture 파일 만들기 */
+			D3D11_TEXTURE2D_DESC destDesc;
+			ZeroMemory(&destDesc, sizeof(D3D11_TEXTURE2D_DESC));
+			destDesc.Width = texture->mWidth;
+			destDesc.Height = texture->mHeight;
+			destDesc.MipLevels = 1;
+			destDesc.ArraySize = 1;
+			destDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+			destDesc.SampleDesc.Count = 1;
+			destDesc.SampleDesc.Quality = 0;
+			destDesc.Usage = D3D11_USAGE_IMMUTABLE;
+
+			D3D11_SUBRESOURCE_DATA subResource = { 0 };
+			subResource.pSysMem = texture->pcData;
+
+			ID3D11Texture2D* dest;
+
+			HRESULT hr;
+			hr = D3D::GetDevice()->CreateTexture2D(&destDesc, &subResource, &dest);
+			assert(SUCCEEDED(hr));
+
+			D3DX11SaveTextureToFileA(D3D::GetDC(), dest, D3DX11_IFF_PNG, saveFolder.c_str());
+		}
+	}
+	else // 내장 텍스처가 없는 경우
+	{
+		string directory = Path::GetDirectoryName(String::ToString(this->file));
+		string origin = directory + file;
+		String::Replace(&origin, "\\", "/");
+
+		if (Path::ExistFile(origin) == false)
+			return "";
+
+		path = saveFolder + fileName;
+		CopyFileA(origin.c_str(), path.c_str(), FALSE);
+
+		String::Replace(&path, "../../_Textures/", "");
+	}
+
+	return Path::GetFileName(path);
 }
 
 

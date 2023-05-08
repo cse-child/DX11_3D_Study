@@ -16,6 +16,10 @@ cbuffer CB_World
     matrix World;
 };
 
+Texture2D DiffuseMap;
+Texture2D SpecularMap;
+Texture2D NormalMap;
+
 
 ///////////////////////////////////////////////////////////////////////////////
 

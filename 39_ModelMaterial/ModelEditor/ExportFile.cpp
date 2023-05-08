@@ -4,10 +4,10 @@
 
 void ExportFile::Initialize()
 {
-	//Airplane();
-	//Tower();
-	//Tank();
-	Kachugin();
+	Airplane();
+	Tower();
+	Tank();
+	Kachujin();
 }
 
 void ExportFile::Airplane()
@@ -33,11 +33,11 @@ void ExportFile::Tank()
 	Converter* conv = new Converter();
 	conv->ReadFile(L"Tank/Tank.fbx");
 	conv->ExportMesh(L"Tank/Tank");
-	conv->ExportMaterial(L"Tank/Tank");
+	conv->ExportMaterial(L"Tank/Tank", false);
 	SafeDelete(conv);
 }
 
-void ExportFile::Kachugin()
+void ExportFile::Kachujin()
 {
 	Converter* conv = new Converter();
 	conv->ReadFile(L"Kachujin/Mesh.fbx");

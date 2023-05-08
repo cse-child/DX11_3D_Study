@@ -45,6 +45,7 @@
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="Model\ModelMesh.cpp" />
     <ClCompile Include="Model\ModelRender.cpp" />
+    <ClCompile Include="Renders\Material.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Renders">
@@ -109,5 +110,6 @@
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="Model\ModelMesh.h" />
     <ClInclude Include="Model\ModelRender.h" />
+    <ClInclude Include="Renders\Material.h" />
   </ItemGroup>
 </Project>

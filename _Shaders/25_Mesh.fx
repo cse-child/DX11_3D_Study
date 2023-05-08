@@ -1,6 +1,5 @@
 #include "00_Global.fx"
 
-Texture2D DiffuseMap;
 float3 Direction;
 
 struct VertexOutput
@@ -27,7 +26,7 @@ float4 PS(VertexOutput input) : SV_Target
 {
     float3 normal = normalize(input.Normal);
     float3 light = -Direction;
-
+    
     return DiffuseMap.Sample(LinearSampler, input.Uv) * dot(light, normal);
 }
 

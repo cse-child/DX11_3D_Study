@@ -31,12 +31,12 @@ struct VertexOutput
 VertexOutput VS(VertexModel input)
 {
     VertexOutput output;
-
+    
     World = mul(BoneTransforms[BoneIndex], World);
-
+    
     output.Position = WorldPosition(input.Position);
     output.Position = ViewProjection(output.Position);
-
+    
     output.Normal = WorldNormal(input.Normal);
     output.Uv = input.Uv;
     
@@ -46,8 +46,8 @@ VertexOutput VS(VertexModel input)
 float4 PS(VertexOutput input) : SV_Target
 {
     float NdotL = dot(normalize(input.Normal), -Direction); // 음영 넣기
-
-    return float4(1, 1, 1, 1) * NdotL;
+    
+    return DiffuseMap.Sample(LinearSampler, input.Uv) * NdotL;
 }
 
 technique11 T0

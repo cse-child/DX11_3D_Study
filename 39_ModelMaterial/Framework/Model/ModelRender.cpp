@@ -43,6 +43,11 @@ void ModelRender::Render()
 void ModelRender::ReadMesh(wstring file)
 {
 	model->ReadMesh(file);
+}
+
+void ModelRender::ReadMaterial(wstring file)
+{
+	model->ReadMaterial(file);
 
 	bRead = true;
 }
@@ -72,4 +77,10 @@ void ModelRender::UpdateTransform(ModelBone* bone, Matrix& matrix)
 
 void ModelRender::UpdateBones(ModelBone* bone, Matrix& matrix)
 {
+	// Bone의 Root부터 자식까지 이동 Matrix를 모두 곱해서 다같이 움직여질 수 있도록 구현
+	Matrix temp = bone->Transform();
+	bone->Transform(temp * matrix);
+
+	for (ModelBone* child : bone->Childs())
+		UpdateBones(child, matrix);
 }
