@@ -84,3 +84,5 @@ void ModelRender::UpdateBones(ModelBone* bone, Matrix& matrix)
 	for (ModelBone* child : bone->Childs())
 		UpdateBones(child, matrix);
 }
+
+

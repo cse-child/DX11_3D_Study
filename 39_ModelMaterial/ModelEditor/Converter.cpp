@@ -213,12 +213,12 @@ void Converter::ReadMaterialData()
 
 void Converter::WriteMaterialData(wstring savePath)
 {
-	/* TINYXML을 이용한 xml 코드 */
 	string folder = String::ToString(Path::GetDirectoryName(savePath));
 	string file = String::ToString(Path::GetFileName(savePath));
 
 	Path::CreateFolders(folder);
 
+	/* TINYXML을 이용한 xml 코드 */
 	Xml::XMLDocument* document = new Xml::XMLDocument();
 
 	Xml::XMLDeclaration* decl = document->NewDeclaration();

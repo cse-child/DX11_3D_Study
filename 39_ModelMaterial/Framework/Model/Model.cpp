@@ -174,7 +174,6 @@ void Model::ReadMaterial(wstring file)
 	{
 		Material* material = new Material();
 
-
 		Xml::XMLElement* node = NULL;
 
 		node = materialNode->FirstChildElement();
