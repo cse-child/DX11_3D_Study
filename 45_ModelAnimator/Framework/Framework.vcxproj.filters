@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Renders\Texture.cpp">
+      <Filter>Renders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renders\Context.cpp">
+      <Filter>Renders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renders\Shader.cpp">
+      <Filter>Renders</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Keyboard.cpp" />
+    <ClCompile Include="Systems\Mouse.cpp" />
+    <ClCompile Include="Systems\Time.cpp" />
+    <ClCompile Include="Systems\Window.cpp" />
+    <ClCompile Include="Systems\D3D.cpp" />
+    <ClCompile Include="Systems\Gui.cpp" />
+    <ClCompile Include="Utilities\String.cpp" />
+    <ClCompile Include="Utilities\Xml.cpp" />
+    <ClCompile Include="Utilities\BinaryFile.cpp" />
+    <ClCompile Include="Utilities\Math.cpp" />
+    <ClCompile Include="Utilities\Path.cpp" />
+    <ClCompile Include="Viewer\Viewport.cpp" />
+    <ClCompile Include="Viewer\Orthographic.cpp" />
+    <ClCompile Include="Viewer\Perspective.cpp" />
+    <ClCompile Include="Viewer\Projection.cpp" />
+    <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="Viewer\Camera.cpp" />
+    <ClCompile Include="Viewer\Freedom.cpp" />
+    <ClCompile Include="Environment\Terrain.cpp" />
+    <ClCompile Include="Renders\DebugLine.cpp" />
+    <ClCompile Include="Meshes\Mesh.cpp" />
+    <ClCompile Include="Meshes\MeshQuad.cpp" />
+    <ClCompile Include="Meshes\MeshCube.cpp" />
+    <ClCompile Include="Meshes\MeshGrid.cpp" />
+    <ClCompile Include="Meshes\MeshSphere.cpp" />
+    <ClCompile Include="Meshes\MeshCylinder.cpp" />
+    <ClCompile Include="Objects\CubeMap.cpp" />
+    <ClCompile Include="Environment\CubeSky.cpp" />
+    <ClCompile Include="Renders\Buffers.cpp" />
+    <ClCompile Include="Renders\Transform.cpp" />
+    <ClCompile Include="Renders\PerFrame.cpp" />
+    <ClCompile Include="Renders\Renderer.cpp" />
+    <ClCompile Include="Model\Model.cpp" />
+    <ClCompile Include="Model\ModelMesh.cpp" />
+    <ClCompile Include="Model\ModelRender.cpp" />
+    <ClCompile Include="Renders\Material.cpp" />
+    <ClCompile Include="Model\ModelClip.cpp" />
+    <ClCompile Include="Model\ModelAnimator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Renders">
+      <UniqueIdentifier>{4a50dcc2-9725-4ecf-af92-8d271fa75e07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{46e3b80b-65ec-41e8-8506-fe51f92e9f80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{577b66f7-e4e0-4eb2-b538-4dc3cdd32fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewer">
+      <UniqueIdentifier>{ef39f889-33e4-4a2a-933e-c9530838a1e1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Renders\Texture.h">
+      <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renders\VertexLayouts.h">
+      <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renders\Context.h">
+      <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renders\Shader.h">
+      <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\Keyboard.h" />
+    <ClInclude Include="Systems\Mouse.h" />
+    <ClInclude Include="Systems\Time.h" />
+    <ClInclude Include="Systems\Window.h" />
+    <ClInclude Include="Systems\D3D.h" />
+    <ClInclude Include="Systems\Gui.h" />
+    <ClInclude Include="Systems\IExecute.h" />
+    <ClInclude Include="Utilities\String.h" />
+    <ClInclude Include="Utilities\Xml.h" />
+    <ClInclude Include="Utilities\BinaryFile.h" />
+    <ClInclude Include="Utilities\Math.h" />
+    <ClInclude Include="Utilities\Path.h" />
+    <ClInclude Include="Viewer\Projection.h" />
+    <ClInclude Include="Viewer\Viewport.h" />
+    <ClInclude Include="Viewer\Orthographic.h" />
+    <ClInclude Include="Viewer\Perspective.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="Viewer\Camera.h" />
+    <ClInclude Include="Viewer\Freedom.h" />
+    <ClInclude Include="Environment\Terrain.h" />
+    <ClInclude Include="Renders\DebugLine.h" />
+    <ClInclude Include="Meshes\Mesh.h" />
+    <ClInclude Include="Meshes\MeshQuad.h" />
+    <ClInclude Include="Meshes\MeshCube.h" />
+    <ClInclude Include="Meshes\MeshGrid.h" />
+    <ClInclude Include="Meshes\MeshSphere.h" />
+    <ClInclude Include="Meshes\MeshCylinder.h" />
+    <ClInclude Include="Objects\CubeMap.h" />
+    <ClInclude Include="Environment\CubeSky.h" />
+    <ClInclude Include="Renders\Buffers.h" />
+    <ClInclude Include="Renders\Transform.h" />
+    <ClInclude Include="Renders\PerFrame.h" />
+    <ClInclude Include="Renders\Renderer.h" />
+    <ClInclude Include="Model\Model.h" />
+    <ClInclude Include="Model\ModelMesh.h" />
+    <ClInclude Include="Model\ModelRender.h" />
+    <ClInclude Include="Renders\Material.h" />
+    <ClInclude Include="Model\ModelClip.h" />
+    <ClInclude Include="Model\ModelAnimator.h" />
+  </ItemGroup>
+</Project>
