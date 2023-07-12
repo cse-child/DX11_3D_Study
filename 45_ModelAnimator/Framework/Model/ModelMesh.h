@@ -61,12 +61,14 @@ public:
 	void Transforms(Matrix* transforms); // BoneDesc의 Transforms에 접근하기 위한 함수
 	void SetTransform(Transform* transform); // Model의 위치를 움직이기 위한 함수
 
+	void TransformsSRV(ID3D11ShaderResourceView* srv) { transformsSRV = srv; }
+
 private:
 	struct BoneDesc
 	{
 		Matrix Transforms[MAX_MODEL_TRANSFORMS];
 
-		UINT index;
+		UINT Index;
 		float Padding[3];
 	} boneDesc;
 
@@ -95,5 +97,8 @@ private:
 
 	ConstantBuffer* boneBuffer;
 	ID3DX11EffectConstantBuffer* sBoneBuffer;
+
+	ID3D11ShaderResourceView* transformsSRV = NULL;
+	ID3DX11EffectShaderResourceVariable* sTransformsSRV;
 };
 

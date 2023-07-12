@@ -2,32 +2,52 @@
 #include "ModelAnimator.h"
 
 ModelAnimator::ModelAnimator(Shader* shader)
+	:shader(shader)
 {
 	model = new Model();
 	transform = new Transform(shader);
+
+	frameBuffer = new ConstantBuffer(&keyframeDesc, sizeof(KeyframeDesc));
+	sFrameBuffer = shader->AsConstantBuffer("CB_TweenFrame");
 }
 
 ModelAnimator::~ModelAnimator()
 {
 	SafeDelete(model);
 	SafeDelete(transform);
+
+	SafeDeleteArray(clipTransforms);
+	SafeRelease(texture);
+	SafeRelease(srv);
+
+	SafeDelete(frameBuffer);
 }
 
 void ModelAnimator::Update()
 {
-	if(texture == NULL)
+	ImGui::InputInt("Clip", &keyframeDesc.Clip);
+	keyframeDesc.Clip %= model->ClipCount();
+
+	ImGui::InputInt("CurrFrame", (int*)&keyframeDesc.CurrFrame);
+	keyframeDesc.CurrFrame %= model->ClipByIndex(keyframeDesc.Clip)->FrameCount();
+
+	if (texture == NULL)
 	{
-		//for (ModelMesh* mesh : model->Meshes())
-		//	mesh->SetShader(shader);
+		for (ModelMesh* mesh : model->Meshes())
+			mesh->SetShader(shader);
 
 		CreateTexture();
 	}
+
 	for (ModelMesh* mesh : model->Meshes())
 		mesh->Update();
 }
 
 void ModelAnimator::Render()
 {
+	frameBuffer->Render();
+	sFrameBuffer->SetConstantBuffer(frameBuffer->Buffer());
+
 	for (ModelMesh* mesh : model->Meshes())
 	{
 		mesh->SetTransform(transform);
@@ -66,7 +86,7 @@ void ModelAnimator::CreateTexture()
 	{
 		D3D11_TEXTURE2D_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
-		desc.Width = MAX_MODEL_KEYFRAMES * 4;				// Texture의 넓이에는 Bone 값이 들어간다.
+		desc.Width = MAX_MODEL_TRANSFORMS * 4;				// Texture의 넓이에는 Bone 값이 들어간다.
 		desc.Height = MAX_MODEL_KEYFRAMES;
 		desc.ArraySize = model->ClipCount();
 		desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;		// 16Byte * 4 = 64Byte (쪼개서 다시 가져오는건 Shader에서 처리)
@@ -97,9 +117,9 @@ void ModelAnimator::CreateTexture()
 		}// for(c)
 		
 		D3D11_SUBRESOURCE_DATA* subResources = new D3D11_SUBRESOURCE_DATA[model->ClipCount()];
-		for(int c = 0; c < model->ClipCount(); c++)
+		for (UINT c = 0; c < model->ClipCount(); c++)
 		{
-			void* temp = (BYTE*)p + c * pageSize;
+			void* temp = (BYTE *)p + c * pageSize;
 
 			subResources[c].pSysMem = temp;
 			subResources[c].SysMemPitch = MAX_MODEL_TRANSFORMS * sizeof(Matrix);
@@ -110,6 +130,22 @@ void ModelAnimator::CreateTexture()
 		SafeDeleteArray(subResources);
 		VirtualFree(p, 0, MEM_RELEASE);
 	}
+
+	//Create SRV
+	{
+		D3D11_SHADER_RESOURCE_VIEW_DESC desc;
+		ZeroMemory(&desc, sizeof(D3D11_SHADER_RESOURCE_VIEW_DESC));
+		desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2DARRAY;
+		desc.Texture2DArray.MipLevels = 1;
+		desc.Texture2DArray.ArraySize = model->ClipCount();
+
+		Check(D3D::GetDevice()->CreateShaderResourceView(texture, &desc, &srv));
+	}
+
+	for (ModelMesh* mesh : model->Meshes())
+		mesh->TransformsSRV(srv);
+	
 }
 
 void ModelAnimator::CreateClipTransform(UINT index)
@@ -117,11 +153,12 @@ void ModelAnimator::CreateClipTransform(UINT index)
 	Matrix* bones = new Matrix[MAX_MODEL_TRANSFORMS];
 
 	ModelClip* clip = model->ClipByIndex(index);
-	for(UINT f = 0; f < clip->FrameCount(); f++)
+	for (UINT f = 0; f < clip->FrameCount(); f++)
 	{
-		for(UINT b = 0; b < model->BoneCount(); b++)
+		for (UINT b = 0; b < model->BoneCount(); b++)
 		{
 			ModelBone* bone = model->BoneByIndex(b);
+
 
 			Matrix parent;
 			Matrix invGlobal = bone->Transform();
@@ -133,11 +170,12 @@ void ModelAnimator::CreateClipTransform(UINT index)
 			else
 				parent = bones[parentIndex];
 
+
 			Matrix animation;
 			ModelKeyframe* frame = clip->Keyframe(bone->Name());
 
 			/* Animation Bone이 프레임에 따라 얼마만큼 이동할지 설정 */
-			if(frame != NULL)
+			if (frame != NULL)
 			{
 				ModelKeyframeData& data = frame->Transforms[f];
 
@@ -146,7 +184,7 @@ void ModelAnimator::CreateClipTransform(UINT index)
 				D3DXMatrixRotationQuaternion(&R, &data.Rotation);
 				D3DXMatrixTranslation(&T, data.Translation.x, data.Translation.y, data.Translation.z);
 
-				animation = S * R  * T;
+				animation = S * R * T;
 			}
 			else
 			{
@@ -155,8 +193,6 @@ void ModelAnimator::CreateClipTransform(UINT index)
 
 			bones[b] = animation * parent;
 			clipTransforms[index].Transform[f][b] = invGlobal * bones[b];
-		} // for(b)
-	} // for(f)
+		}//for(b)
+	}//for(f)
 }
-
-

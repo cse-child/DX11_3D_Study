@@ -3,10 +3,12 @@
 
 ModelBone::ModelBone()
 {
+
 }
 
 ModelBone::~ModelBone()
 {
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -32,7 +34,7 @@ ModelMesh::~ModelMesh()
 	SafeDelete(boneBuffer);
 }
 
-void ModelMesh::Binding(Model* model)
+void ModelMesh::Binding(Model * model)
 {
 	vertexBuffer = new VertexBuffer(vertices, vertexCount, sizeof(Model::ModelVertex));
 	indexBuffer = new IndexBuffer(indices, indexCount);
@@ -43,7 +45,7 @@ void ModelMesh::Binding(Model* model)
 	material->CopyFrom(srcMaterial);
 }
 
-void ModelMesh::SetShader(Shader* shader)
+void ModelMesh::SetShader(Shader * shader)
 {
 	this->shader = shader;
 
@@ -56,11 +58,13 @@ void ModelMesh::SetShader(Shader* shader)
 	sBoneBuffer = shader->AsConstantBuffer("CB_Bone");
 
 	material->SetShader(shader);
+
+	sTransformsSRV = shader->AsSRV("TransformsMap");
 }
 
 void ModelMesh::Update()
 {
-	boneDesc.index = boneIndex;
+	boneDesc.Index = boneIndex;
 
 	perFrame->Update();
 	transform->Update();
@@ -78,21 +82,22 @@ void ModelMesh::Render()
 	vertexBuffer->Render();
 	indexBuffer->Render();
 
+	if (transformsSRV != NULL)
+		sTransformsSRV->SetResource(transformsSRV);
+
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	shader->DrawIndexed(0, pass, indexCount);
 }
 
-void ModelMesh::Transforms(Matrix* transforms)
+void ModelMesh::Transforms(Matrix * transforms)
 {
 	memcpy(boneDesc.Transforms, transforms, sizeof(Matrix) * MAX_MODEL_TRANSFORMS);
 }
 
-void ModelMesh::SetTransform(Transform* transform)
+void ModelMesh::SetTransform(Transform * transform)
 {
 	this->transform->Set(transform);
 }
-
-
 
 
